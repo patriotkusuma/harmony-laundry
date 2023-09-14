@@ -57,8 +57,7 @@ const Tambah = (props) => {
     },[filteredData]);
 
     const qtyChange = (e) => {
-        var totalBeli = e.target.value * data['harga'].replace('.', '');
-        console.log(parseFloat(data['harga'].replace('.', '')));
+        var totalBeli = e.target.value * data['harga'].replaceAll('.', '');
         setData('qty', e.target.value);
         setTotalPembelian(addCommas(removeNonNumeric(totalBeli)));
 

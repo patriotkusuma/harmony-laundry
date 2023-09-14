@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('satuan', ['kilo', 'liter', 'satuan'])->default('satuan');
             $table->double('harga');
             $table->double('total_pembelian');
-            $table->text('keterangan');
+            $table->text('keterangan')->nullable();
             $table->date('tanggal_pembelian');
             $table->timestamps();
         });

@@ -7,6 +7,7 @@ import AdminLayout from '@/Layouts/AdminLayout'
 import moment from 'moment';
 import React, { useState } from 'react'
 import { Button, Container, Row } from 'reactstrap';
+import { Head } from '@inertiajs/react';
 
 const headRow = ['No','Nama','QTY','Satuan', 'Harga', 'Total Pembelian', 'Action'];
 
@@ -47,6 +48,8 @@ const DanaKeluar = (props) => {
         user={auth.user}
         header="Belanja Kebutuhan"
     >
+        <Head title='Belanja Kebutuhan' />
+
         <Header />
         {/* <header className="bg-gradient-info pb-8 pt-5 pt-md-8"> */}
             <Container className='mt--7' fluid>

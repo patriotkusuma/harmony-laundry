@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('keperluan');
             $table->double('jumlah_keluar');
-            $table->string('bukti_keluar');
-            $table->text('keterangan');
+            $table->string('bukti_keluar')->nullable();
+            $table->text('keterangan')->nullable();
             $table->date('tanggal_keluar');
             $table->timestamps();
         });
