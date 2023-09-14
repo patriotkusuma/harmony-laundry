@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\BelanjaKebutuhan;
-use App\Http\Requests\StoreBelanjaKebutuhanRequest;
-use App\Http\Requests\UpdateBelanjaKebutuhanRequest;
+use App\Http\Requests\BelanjaKebutuhan\StoreBelanjaKebutuhanRequest;
+use App\Http\Requests\BelanjaKebutuhan\UpdateBelanjaKebutuhanRequest;
+use App\Models\DanaKeluar;
 use Inertia\Inertia;
 
 class BelanjaKebutuhanController extends Controller
@@ -14,6 +15,7 @@ class BelanjaKebutuhanController extends Controller
      */
     public function index()
     {
+
         $kebutuhans = BelanjaKebutuhan::all();
 
         return Inertia::render('Harmony/BelanjaKebutuhan', compact('kebutuhans'));
@@ -37,8 +39,15 @@ class BelanjaKebutuhanController extends Controller
         $harga = str_replace('.', '', $request->harga);
         $total_pembelian = $harga * $request->qty;
 
+        $danaKeluar = new DanaKeluar();
+        $danaKeluar->keperluan = 'Belanja ' . $request->nama;
+        $danaKeluar->jumlah_keluar = $total_pembelian;
+        $danaKeluar->tanggal_keluar = $request->tanggal_pembelian;
+        $danaKeluar->keterangan = 'Dana keluar sebesar ' . $total_pembelian . ' untuk belanja ' . $request->nama;
+        $danaKeluar->save();
+
         $belanjaKebutuhan = new BelanjaKebutuhan();
-        $belanjaKebutuhan->id_dana_keluar = $request->id_dana_keluar;
+        $belanjaKebutuhan->id_dana_keluar = $danaKeluar->id;
         $belanjaKebutuhan->nama = $request->nama;
         $belanjaKebutuhan->qty = $request->qty;
         $belanjaKebutuhan->satuan = $request->satuan;
@@ -76,6 +85,14 @@ class BelanjaKebutuhanController extends Controller
 
         $harga = str_replace('.', '', $request->harga);
         $total_pembelian = $harga * $request->qty;
+
+        $belanjaKebutuhan->danaKeluar->update([
+            'keperluan' => 'Belanja ' . $request->nama,
+            'jumlah_keluar' => $total_pembelian,
+            'tanggal_keluar' => $request->tanggal_pembelian,
+            'keterangan' => 'Dana keluar sebesar ' . $total_pembelian . ' untuk belanja ' . $request->nama,
+        ]);
+
 
         $belanjaKebutuhan->update([
             'nama' => $request->nama,

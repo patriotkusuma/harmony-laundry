@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\BelanjaKebutuhan;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreBelanjaKebutuhanRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreBelanjaKebutuhanRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -22,7 +23,11 @@ class StoreBelanjaKebutuhanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nama'  => 'required',
+            'harga' => 'required',
+            'qty'   => 'required',
+            'satuan' => 'required|in:kilo,liter,satuan',
+            'harga' => 'required',
         ];
     }
 }

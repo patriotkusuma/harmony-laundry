@@ -19,6 +19,7 @@ const DanaKeluar = (props) => {
     const addCommas = num => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     const removeNonNumeric = num => num.toString().replace(/[^0-9]/g, "");
 
+
     const addData = () => {
         setIsOpen(true);
         setFiltered(null);
@@ -67,14 +68,26 @@ const DanaKeluar = (props) => {
                                             {/* {(((data.current_page - 2) * data.per_page) + index + data.per_page + 1)} */}
                                         </th>
                                         <td>
-                                            <span className="mb-0 text-sm">{danaKeluar.nama}</span>
+                                            <span className="mb-0 text-sm">{kebutuhan.nama}</span>
+                                        </td>
+                                        <td>
+                                            <span className="mb-0 text-sm">{kebutuhan.qty}</span>
+                                        </td>
+                                        <td>
+                                            <span className="mb-0 text-sm">{kebutuhan.satuan}</span>
+                                        </td>
+                                        <td>
+                                            <span className="mb-0 text-sm">{'Rp ' + addCommas(removeNonNumeric(kebutuhan.harga))}</span>
+                                        </td>
+                                        <td>
+                                            <span className="mb-0 text-sm">{'Rp ' + addCommas(removeNonNumeric(kebutuhan.total_pembelian))}</span>
                                         </td>
 
                                         <td>
                                             <Button
                                                 color='warning'
                                                 size='sm'
-                                                onClick={() => editData(danaKeluar)}
+                                                onClick={() => editData(kebutuhan)}
                                             >
                                                 <i class="fa-solid fa-pen-to-square mr-2"></i>
                                                 Edit
@@ -82,7 +95,7 @@ const DanaKeluar = (props) => {
                                             <Button
                                                 color='danger'
                                                 size='sm'
-                                                onClick={() => deleteData(danaKeluar)}
+                                                onClick={() => deleteData(kebutuhan)}
                                             >
                                                 <i class="fa-solid fa-trash-can mr-2"></i>
                                                 Hapus

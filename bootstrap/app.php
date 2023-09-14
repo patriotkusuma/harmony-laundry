@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -14,6 +15,24 @@
 $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
+
+
+/*
+|--------------------------------------------------------------------------
+| Load Environment File on Startup
+|--------------------------------------------------------------------------
+|
+| This will determine, which environment will be loaded for our application.
+|
+*/
+$env = $app->detectEnvironment(function() {
+    return getenv('APP_ENV') ?: 'local';
+
+});
+
+
+$app->loadEnvironmentFrom(".env.{$env}");
+
 
 /*
 |--------------------------------------------------------------------------

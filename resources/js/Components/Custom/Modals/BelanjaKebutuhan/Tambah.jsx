@@ -19,9 +19,6 @@ const Tambah = (props) => {
         tanggal_pembelian:  '',
     })
 
-    const onChanged = (e) => {
-        console.log(e);
-    }
 
     const addCommas = num => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     const removeNonNumeric = num => num.toString().replace(/[^0-9]/g, "");
@@ -37,12 +34,13 @@ const Tambah = (props) => {
                 nama:  filteredData.nama,
                 qty:  filteredData.qty,
                 satuan:  filteredData.satuan,
-                harga:  filteredData.harga,
-                total_pembelian:  filteredData.total_pembelian,
+                harga:  addCommas(removeNonNumeric(filteredData.harga)),
+                total_pembelian:  addCommas(removeNonNumeric(filteredData.harga * filteredData.qty)),
                 keterangan:  filteredData.keterangan,
                 tanggal_pembelian:  filteredData.tanggal_pembelian,
 
             });
+            setTotalPembelian(addCommas(removeNonNumeric(filteredData.harga * filteredData.qty)));
         }else{
             setData({
                 id:  '',
@@ -200,6 +198,38 @@ const Tambah = (props) => {
                                     </small>
                                 ) }
 
+                            </FormGroup>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <FormGroup>
+                                <label
+                                    className='form-control-label'
+                                    htmlFor="exampleFormControlSelect1">
+                                        Satuan
+                                </label>
+                                <br/>
+                                <Input
+                                    bsSize="lg"
+                                    className="form-control form-control-alternative form-select"
+                                    type="select"
+                                    id='satuan'
+                                    name='satuan'
+                                    defaultValue={filteredData != null ? filteredData.satuan : ''}
+                                    onChange={(e)=>setData('satuan', e.target.value)}
+                                    invalid = {errors.satuan && true}
+                                    required
+                                >
+                                    <option value=''>Pilih Satuan</option>
+                                    <option value="kilo">Kilo</option>
+                                    <option value="liter">Liter</option>
+                                    <option value="satuan">Satuan</option>
+                                </Input>
+
+                                <FormFeedback>
+                                    {errors.satuan && errors.satuan }
+                                </FormFeedback>
                             </FormGroup>
                         </Col>
                     </Row>
