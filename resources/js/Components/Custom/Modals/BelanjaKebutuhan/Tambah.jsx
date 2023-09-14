@@ -257,7 +257,6 @@ const Tambah = (props) => {
                                         name='tanggal_pembelian'
                                         placeholder='tanggal_pembelian'
                                         type='date'
-                                        value={totalPembelian}
                                         defaultValue={filteredData != null ? filteredData.tanggal_pembelian : ''}
                                         onChange={(e) => setData('tanggal_pembelian', e.target.value)}
                                         invalid={errors.tanggal_pembelian && true}
