@@ -219,6 +219,7 @@ const MyTable = (props) => {
                 isOpen={deleteOpen}
                 toggleModal={deleteToggle}
                 deleteData={filtered}
+                deleteRoute='jenis-cuci.destroy'
             />
         </>
     )

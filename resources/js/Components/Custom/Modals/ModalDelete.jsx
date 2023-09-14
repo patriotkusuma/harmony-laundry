@@ -4,12 +4,12 @@ import { Button, Col, Modal, Row } from 'reactstrap'
 import { useForm } from '@inertiajs/react';
 
 const ModalDelete = (props) => {
-    const {isOpen, toggleModal, deleteData} = props;
+    const {isOpen, toggleModal, deleteData, deleteRoute} = props;
     const {delete:destroy} = useForm();
 
     const submit = (e) => {
         e.preventDefault();
-        destroy(route('jenis-cuci.destroy', deleteData.id),
+        destroy(route(deleteRoute, deleteData.id),
             {
                 preserveScroll:true,
                 preserveState:true,
@@ -90,6 +90,7 @@ ModalDelete.propTypes = {
     isOpen: PropTypes.bool,
     toggleModal: PropTypes.func,
     deleteData: PropTypes.any,
+    deleteRoute: PropTypes.string.isRequired,
 }
 
 export default ModalDelete

@@ -1,6 +1,6 @@
 import Header from '@/Components/Argon/Headers/Header';
 import Delete from '@/Components/Custom/Modals/BelanjaKebutuhan/Delete';
-import Tambah from '@/Components/Custom/Modals/BelanjaKebutuhan/Tambah';
+import Tambah from '@/Components/Custom/Modals/Pegawai/Tambah';
 import CustomTable from '@/Components/Custom/Tables/CustomTable';
 import DanaKeluarTable from '@/Components/Custom/Tables/DanaKeluarTable';
 import AdminLayout from '@/Layouts/AdminLayout'
@@ -9,7 +9,7 @@ import React, { useState } from 'react'
 import { Button, Container, Row } from 'reactstrap';
 import { Head } from '@inertiajs/react';
 
-const headRow = ['No','Nama','QTY','Satuan', 'Harga', 'Total Pembelian', 'Action'];
+const headRow = ['No','Pegawai','Email','Gaji', 'Tanggal Masuk', 'Kontak', 'Action'];
 
 const Pegawai = (props) => {
     const {auth, pegawais} = props;
@@ -46,9 +46,9 @@ const Pegawai = (props) => {
   return (
     <AdminLayout
         user={auth.user}
-        header="Belanja Kebutuhan"
+        header="Daftar Pegawai"
     >
-        <Head title='Belanja Kebutuhan' />
+        <Head title='Daftar Pegawai' />
 
         <Header />
         {/* <header className="bg-gradient-info pb-8 pt-5 pt-md-8"> */}
@@ -58,7 +58,7 @@ const Pegawai = (props) => {
                     <div className="col">
                         <CustomTable
                             data={pegawais}
-                            tableHead='Dana Keluar'
+                            tableHead='Daftar Pegawai'
                             headData={headRow}
                             toggleModal={toggleModal}
                             addData={addData}
@@ -72,21 +72,6 @@ const Pegawai = (props) => {
                                         </th>
                                         <td>
                                             <span className="mb-0 text-sm">{pegawai.nama}</span>
-                                        </td>
-                                        <td>
-                                            <span className="mb-0 text-sm">{pegawai.alamat}</span>
-                                        </td>
-                                        <td>
-                                            <span className="mb-0 text-sm">{pegawai.qty}</span>
-                                        </td>
-                                        <td>
-                                            <span className="mb-0 text-sm">{pegawai.satuan}</span>
-                                        </td>
-                                        <td>
-                                            <span className="mb-0 text-sm">{'Rp ' + addCommas(removeNonNumeric(pegawai.harga))}</span>
-                                        </td>
-                                        <td>
-                                            <span className="mb-0 text-sm">{'Rp ' + addCommas(removeNonNumeric(pegawai.total_pembelian))}</span>
                                         </td>
 
                                         <td>

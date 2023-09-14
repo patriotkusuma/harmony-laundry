@@ -35,7 +35,7 @@ class PegawaiController extends Controller
      */
     public function store(StorePegawaiRequest $request)
     {
-        //
+        $request->validated();
     }
 
     /**
