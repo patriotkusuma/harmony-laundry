@@ -227,7 +227,7 @@ const Sidebar = (props) => {
                                 className={route().current() === 'belanja-kebutuhan.index' ? 'bg-teal text-default' : 'text-muted'}
 
                             >
-                                <i className="fa-solid fa-cart-shopping"></i>
+                                <i className="fa-solid fa-cart-shopping text-primary"></i>
                                 Belanja Kebutuhan
                             </NavLink>
                         </UncontrolledCollapse>

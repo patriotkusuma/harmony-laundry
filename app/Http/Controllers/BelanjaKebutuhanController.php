@@ -113,6 +113,7 @@ class BelanjaKebutuhanController extends Controller
     public function destroy(BelanjaKebutuhan $belanjaKebutuhan)
     {
         $data = $belanjaKebutuhan;
+        $belanjaKebutuhan->danaKeluar->delete();
         $belanjaKebutuhan->delete();
 
         return back()->with('success', 'Data ' . $data->nama . ' berhasil dihapus!');

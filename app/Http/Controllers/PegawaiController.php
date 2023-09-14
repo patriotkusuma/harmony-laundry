@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pegawai;
-use App\Http\Requests\StorePegawaiRequest;
-use App\Http\Requests\UpdatePegawaiRequest;
+use App\Http\Requests\Pegawai\StorePegawaiRequest;
+use App\Http\Requests\Pegawai\UpdatePegawaiRequest;
 use Inertia\Inertia;
 
 class PegawaiController extends Controller
@@ -14,7 +14,12 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Harmony/Pegawai');
+        $pegawais = Pegawai::all();
+        return Inertia::render('Harmony/Pegawai',
+            compact(
+                'pegawais'
+            )
+        );
     }
 
     /**

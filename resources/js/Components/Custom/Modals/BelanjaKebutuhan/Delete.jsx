@@ -9,7 +9,7 @@ const Delete = (props) => {
 
     const submit = (e) => {
         e.preventDefault();
-        destroy(route('dana-keluar.destroy', deleteData.id),
+        destroy(route('belanja-kebutuhan.destroy', deleteData.id),
             {
                 preserveScroll:true,
                 preserveState:true,

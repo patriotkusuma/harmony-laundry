@@ -3,7 +3,7 @@ import { Col, Nav, NavItem, NavLink, Row } from 'reactstrap'
 
 export const AdminFooter = () => {
   return (
-    <footer className='footer mx-4'>
+    <footer className='footer mx-4' >
         <Row className='align-items-center justify-content-xl-between'>
             <Col xl="6">
                 <div className="copyright text-center text-xl-left text-muted">

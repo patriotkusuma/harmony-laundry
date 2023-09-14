@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Pegawai;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StorePegawaiRequest extends FormRequest
 {
@@ -22,7 +23,7 @@ class StorePegawaiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            ''
         ];
     }
 }
