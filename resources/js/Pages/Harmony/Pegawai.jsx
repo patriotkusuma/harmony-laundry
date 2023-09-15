@@ -1,5 +1,5 @@
 import Header from '@/Components/Argon/Headers/Header';
-import Delete from '@/Components/Custom/Modals/BelanjaKebutuhan/Delete';
+import ModalDelete from '@/Components/Custom/Modals/ModalDelete';
 import Tambah from '@/Components/Custom/Modals/Pegawai/Tambah';
 import CustomTable from '@/Components/Custom/Tables/CustomTable';
 import DanaKeluarTable from '@/Components/Custom/Tables/DanaKeluarTable';
@@ -106,10 +106,12 @@ const Pegawai = (props) => {
                 toggleModal={toggleModal}
                 filteredData={filtered}
             />
-            <Delete
+            <ModalDelete
                 isOpen={deleteOpen}
                 toggleModal={deleteToggle}
                 deleteData={filtered}
+                deleteRoute="pegawai.destroy"
+
             />
 
         {/* </header> */}
