@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DanaKeluar;
 use App\Http\Requests\DanaKeluar\StoreDanaKeluarRequest;
 use App\Http\Requests\DanaKeluar\UpdateDanaKeluarRequest;
+use Carbon\Carbon;
 use Inertia\Inertia;
 
 class DanaKeluarController extends Controller
@@ -15,8 +16,13 @@ class DanaKeluarController extends Controller
     public function index()
     {
         $danaKeluars = DanaKeluar::all();
-        $totalDanaKeluar = DanaKeluar::sum('jumlah_keluar');
-        return Inertia::render('Harmony/DanaKeluar', compact('danaKeluars', 'totalDanaKeluar'));
+        $sumCurrentMonth = DanaKeluar::whereMonth('tanggal_keluar', Carbon::now()->month)->sum('jumlah_keluar');
+        $sumCurrentYear = DanaKeluar::whereYear('tanggal_keluar', Carbon::now()->year)->sum('jumlah_keluar');
+        return Inertia::render('Harmony/DanaKeluar', compact(
+            'danaKeluars',
+            'sumCurrentMonth',
+            'sumCurrentYear'
+        ));
     }
 
     /**

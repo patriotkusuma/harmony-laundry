@@ -6,6 +6,7 @@ use App\Models\BelanjaKebutuhan;
 use App\Http\Requests\BelanjaKebutuhan\StoreBelanjaKebutuhanRequest;
 use App\Http\Requests\BelanjaKebutuhan\UpdateBelanjaKebutuhanRequest;
 use App\Models\DanaKeluar;
+use Carbon\Carbon;
 use Inertia\Inertia;
 
 class BelanjaKebutuhanController extends Controller
@@ -16,9 +17,15 @@ class BelanjaKebutuhanController extends Controller
     public function index()
     {
 
-        $kebutuhans = BelanjaKebutuhan::all();
+        $kebutuhans = BelanjaKebutuhan::get();
+        $totalByMonth = BelanjaKebutuhan::whereMonth('tanggal_pembelian', Carbon::now()->month)->sum('total_pembelian');
+        $totalByYear = BelanjaKebutuhan::whereYear('tanggal_pembelian', Carbon::now()->year)->sum('total_pembelian');
 
-        return Inertia::render('Harmony/BelanjaKebutuhan', compact('kebutuhans'));
+        return Inertia::render('Harmony/BelanjaKebutuhan', compact(
+            'kebutuhans',
+            'totalByMonth',
+            'totalByYear',
+        ));
     }
 
     /**

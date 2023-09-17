@@ -17,6 +17,7 @@ return new class extends Migration
             $table->double('harga')->default(0);
             $table->string('tipe');
             $table->text('keterangan')->nullable();
+            $table->string('gambar')->nullable();
             $table->timestamps();
         });
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Pegawai;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdatePegawaiRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class UpdatePegawaiRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::user()->role != "customer" ? true : false;
     }
 
     /**
@@ -22,7 +23,13 @@ class UpdatePegawaiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nama'  => 'required|string|max:255',
+            'alamat'    => 'required',
+            'telpon'    => 'required',
+            'email'     => 'required|email|string|max:255',
+            'gaji'      => 'required',
+            'status'    => 'required|in:active,inactive',
+            'tanggal_masuk' => 'required',
         ];
     }
 }

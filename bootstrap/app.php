@@ -25,25 +25,25 @@ $app = new Illuminate\Foundation\Application(
 | This will determine, which environment will be loaded for our application.
 |
 */
-// $env = $app->detectEnvironment(function() {
-//     return getenv('APP_ENV')? 'production': 'local';
+$env = $app->detectEnvironment(function() {
+    return getenv('APP_ENV')?: 'local';
 
-// });
+});
 
 
-// $app->loadEnvironmentFrom(".env.{$env}");
+$app->loadEnvironmentFrom(".env.{$env}");
 
-if(isset($_SERVER['HTTP_HOST']) && !empty($_SERVER['HTTP_HOST'])){
+// if(isset($_SERVER['HTTP_HOST']) && !empty($_SERVER['HTTP_HOST'])){
 
-    $domain = $_SERVER['HTTP_HOST'];
+//     $domain = $_SERVER['HTTP_HOST'];
 
-    if (isset($domain)) {
-        $app->loadEnvironmentFrom('.env.production');
+//     if (isset($domain)) {
+//         $app->loadEnvironmentFrom('.env.production');
 
-    }else{
-        $app->loadEnvironmentFrom('.env.local');
-    }
-}
+//     }else{
+//         $app->loadEnvironmentFrom('.env.local');
+//     }
+// }
 
 
 /*

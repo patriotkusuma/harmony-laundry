@@ -123,7 +123,7 @@ const CustomTable = (props) => {
 
 
                 </CardHeader>
-                <Table className='align-items-center  table-flush' responsive>
+                <Table className='align-items-center  table-flush '  responsive>
                     <thead className='thead-light'>
                         <tr>
                             {headData.map((th, index) => {

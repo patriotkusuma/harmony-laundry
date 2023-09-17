@@ -51,7 +51,7 @@ export default function AuthNavbar() {
                                 </NavItem>
                                 <NavItem>
                                     <NavLink
-                                        href='/admin/user-profile'
+                                        href={route('profile.edit')}
                                         tag={Link}
                                         className="nav-link-icon">
                                             <i className="ni ni-single-02"></i>
