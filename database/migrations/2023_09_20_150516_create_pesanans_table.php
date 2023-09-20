@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pegawais', function (Blueprint $table) {
+        Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->string('nama');
-            $table->string('alamat');
-            $table->string('telpon');
-            $table->string('email');
-            $table->double('gaji');
-            $table->enum('status', ['active', 'inactive'])->default('active');
-            $table->date('tanggal_masuk');
-            $table->date('tanggal_keluar')->nullable();
+            $table->integer('id_pelanggan');
+            $table->integer('id_pegawai');
+            $table->double('total_harga');
+            $table->enum('status',['cuci','setrika','selesai','diambil','batal'])->default('cuci');
+            $table->date('tanggal_pesan');
+            $table->date('tanggal_selesai')->nullable();
+            $table->date('tanggal_ambil')->nullable();
             $table->text('keterangan')->nullable();
             $table->timestamps();
             $table->softDeletes();
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pegawais');
+        Schema::dropIfExists('pesanans');
     }
 };
