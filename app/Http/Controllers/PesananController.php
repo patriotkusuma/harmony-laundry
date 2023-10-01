@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pesanan;
 use App\Http\Requests\Pesanan\StorePesananRequest;
 use App\Http\Requests\Pesanan\UpdatePesananRequest;
+use Inertia\Inertia;
 
 class PesananController extends Controller
 {
@@ -13,7 +14,10 @@ class PesananController extends Controller
      */
     public function index()
     {
-        //
+        $pesanans = Pesanan::all();
+        return Inertia::render('Harmony/Pesanan/Index', compact(
+            'pesanans'
+        ));
     }
 
     /**

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { BsBagCheck } from "react-icons/bs";
 import {
     Button,
     Col,
@@ -238,15 +239,12 @@ const Sidebar = (props) => {
                                         // tag={Button}
                                         tag="a"
                                     >
-                                        <i className="ni ni-tv-2 text-primary"></i>
+                                        <i class="fa-solid fa-warehouse text-primary"></i>
 
                                         <span>Inventory Management</span>
                                         <i class="fa-solid fa-angle-down"></i>
                                     </NavLink>
-                                    <UncontrolledCollapse
-                                        toggler="#toggler"
-                                        defaultOpen
-                                    >
+                                    <UncontrolledCollapse toggler="#toggler">
                                         <NavLink
                                             href={route("customers.index")}
                                             tag={Link}
@@ -303,17 +301,46 @@ const Sidebar = (props) => {
                                 Paket Laundry
                             </NavLink>
                         </NavItem>
+                        <NavItem>
+                            <NavLink
+                                href={route("pesanan.index")}
+                                tag={Link}
+                                active={
+                                    route().current() === "jenis-cuci.index" &&
+                                    true
+                                }
+                                className={
+                                    route().current() === "jenis-cuci.index"
+                                        ? "bg-teal text-default"
+                                        : ""
+                                }
+                            >
+                                <i class="fa-solid fa-bag-shopping text-primary"></i>
+                                Daftar Pesanan
+                            </NavLink>
+                        </NavItem>
                     </Nav>
                     {/* Devider */}
                     <hr className="my-3" />
                     {/* Heading */}
-                    <h6 className="navbar-heading text-muted">Documentation</h6>
-                    <Nav className="mb-md-3" navbar></Nav>
+                    <h6 className="navbar-heading text-muted">Lainnya</h6>
                     <Nav className="mb-md-3" navbar>
-                        <NavItem className="active-pro active">
-                            <NavLink href="https://www.creative-tim.com/product/argon-dashboard-pro-react?ref=adr-admin-sidebar">
-                                <i className="ni ni-spaceship" />
-                                Upgrade to PRO
+                        <NavItem>
+                            <NavLink
+                                href={route("kontrakan.index")}
+                                tag={Link}
+                                active={
+                                    route().current() === "kontrakan.index" &&
+                                    true
+                                }
+                                className={
+                                    route().current() === "kontrakan.index"
+                                        ? "bg-teal text-default"
+                                        : ""
+                                }
+                            >
+                                <i class="fa-solid fa-shop text-primary"></i>
+                                Kontrakan
                             </NavLink>
                         </NavItem>
                     </Nav>

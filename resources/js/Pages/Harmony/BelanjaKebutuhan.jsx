@@ -121,6 +121,7 @@ const DanaKeluar = (props) => {
                 <Row>
                     <div className="col">
                         <CustomTable
+                            isAdd={true}
                             data={kebutuhans}
                             tableHead="Dana Keluar"
                             headData={headRow}

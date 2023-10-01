@@ -9,7 +9,7 @@ import ModalDelete from '../Modals/ModalDelete';
 
 const CustomTable = (props) => {
 
-    const {tableHead, data, headData,children, toggleModal, addData} = props;
+    const {tableHead, data, headData,children, toggleModal, addData, isAdd} = props;
     const [isOpen, setIsOpen] = useState(false);
     const [filtered, setFiltered] = useState();
     const [searchData, setSearchData] = useState();
@@ -105,16 +105,19 @@ const CustomTable = (props) => {
                                     </InputGroup>
                                 </Form>
                             </Col>
-                            <Col className='order-xs-3 justify-content-end d-flex' xs="12" lg="3">
+                            { isAdd == true && (
+
+                                <Col className='order-xs-3 justify-content-end d-flex' xs="12" lg="3">
                                 <Button
                                     color='primary'
                                     size="md"
                                     onClick={addData}
-                                >
+                                    >
                                     <i className="fa-solid fa-file-circle-plus mr-2"></i>
                                     Tambah Data
                                 </Button>
                             </Col>
+                            )}
                         </Row>
 
 
@@ -165,6 +168,7 @@ CustomTable.propTypes = {
     headData: PropTypes.array.isRequired,
     toggleModal: PropTypes.func,
     addData: PropTypes.func,
+    isAdd: PropTypes.bool,
 }
 
 export default CustomTable

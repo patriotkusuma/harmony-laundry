@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -25,6 +26,10 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/optimize', function(){
+    return Artisan::call('optimize');
+});
+
 Route::get('/assets/{path}', function ($path) {
     return response()->file(public_path('assets/' . $path));
 });
@@ -45,6 +50,8 @@ Route::middleware('auth','checkRole', 'userStatus')->group(function () {
     ROute::put('pegawai-password/{pegawai}', [\App\Http\Controllers\Pegawai\PegawaiPasswordController::class, 'pegawaiUpdatePassword'])->name('pegawai-password.update');
     Route::resource('dana-keluar', \App\Http\Controllers\DanaKeluarController::class);
     Route::resource('belanja-kebutuhan', \App\Http\Controllers\BelanjaKebutuhanController::class);
+    Route::resource('pesanan', \App\Http\Controllers\PesananController::class);
+    Route::resource('kontrakan', \App\Http\Controllers\KontrakanController::class);
 });
 
 require __DIR__ . '/auth.php';
