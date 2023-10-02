@@ -7,7 +7,15 @@ import { Head, useForm } from "@inertiajs/react";
 import React, { useState } from "react";
 import { Button, CardImg, Col, Container, Media, Row } from "reactstrap";
 
-const headRow = ["No", "Identitas", "Alamat", "Keterangan", "Foto", "Action"];
+const headRow = [
+    "No",
+    "Identitas",
+    "harga",
+    "Alamat",
+    "Keterangan",
+    "Foto",
+    "Action",
+];
 
 const KontrakanIndex = (props) => {
     const { auth, kontrakans } = props;
@@ -15,7 +23,12 @@ const KontrakanIndex = (props) => {
     const [filtered, setFiltered] = useState(null);
     const [deleteOpen, setDeleteOpen] = useState(false);
 
-    const {get} = useForm();
+    const addCommas = (num) =>
+        num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    const removeNonNumeric = (num) => num.toString().replace(/[^0-9]/g, "");
+
+
+    const { get } = useForm();
 
     const addData = () => {
         setIsOpen(true);
@@ -23,7 +36,7 @@ const KontrakanIndex = (props) => {
     };
 
     const editData = (value) => {
-        get(route('kontrakan.edit', value.id));
+        get(route("kontrakan.edit", value.id));
     };
 
     const toggleModal = () => {
@@ -33,12 +46,13 @@ const KontrakanIndex = (props) => {
     const deleteData = (value) => {
         setFiltered(value);
         setDeleteOpen(true);
-    }
+    };
 
     const deleteToggle = () => {
         setDeleteOpen(!deleteOpen);
-    }
+    };
 
+    console.log(kontrakans);
     return (
         <AdminLayout user={auth.user} header="List Kontrakan">
             <Head title="List Kontrakan" />
@@ -56,10 +70,12 @@ const KontrakanIndex = (props) => {
                             isAdd={true}
                             addData={addData}
                         >
-                            {kontrakans.map((kontrakan, index) => {
+                            {kontrakans.data.map((kontrakan, index) => {
                                 return (
                                     <tr>
-                                        <th scope="row">{index + 1}</th>
+                                        <th scope="row">
+                                            {(kontrakans.current_page -2) * kontrakans.per_page + index+1 + kontrakans.per_page}
+                                        </th>
                                         <td className="">
                                             <div className="d-flex flex-column">
                                                 <strong>
@@ -76,7 +92,19 @@ const KontrakanIndex = (props) => {
                                                 <span>{kontrakan.nama}</span>
                                             </div>
                                         </td>
-                                        <td>{kontrakan.alamat}</td>
+                                        <td>
+                                            <span className="mb-0 text-sm font-weight-bold">
+                                                 {`Rp ${addCommas(removeNonNumeric(kontrakan.harga))}`}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a
+                                                href={kontrakan.alamat}
+                                                target="_blank"
+                                            >
+                                                Alamat
+                                            </a>
+                                        </td>
                                         <td>{kontrakan.keterangan}</td>
                                         <td>
                                             <a
@@ -88,6 +116,7 @@ const KontrakanIndex = (props) => {
                                                         className="img-responsive"
                                                         src={kontrakan.foto}
                                                         width={"150px"}
+                                                        height={"150px"}
                                                     />
                                                 </Media>
                                             </a>
@@ -117,6 +146,14 @@ const KontrakanIndex = (props) => {
                                     </tr>
                                 );
                             })}
+
+                            {kontrakans.data.length == 0 && (
+                                <tr>
+                                    <td colSpan="6" className="d-flex justify-content-center align-items-center">
+                                        <span>Data Tidak ada.</span>
+                                    </td>
+                                </tr>
+                            )}
                         </CustomTable>
                     </div>
                 </Row>
@@ -131,7 +168,7 @@ const KontrakanIndex = (props) => {
             <Delete
                 isOpen={deleteOpen}
                 toggleModal={deleteToggle}
-                deleteData = {filtered}
+                deleteData={filtered}
             />
         </AdminLayout>
     );

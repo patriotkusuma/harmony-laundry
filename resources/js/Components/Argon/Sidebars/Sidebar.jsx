@@ -23,16 +23,25 @@ import {
     UncontrolledCollapse,
     UncontrolledDropdown,
 } from "reactstrap";
-import { Link, usePage } from "@inertiajs/react";
+import { Link, useForm, usePage } from "@inertiajs/react";
 
 const Sidebar = (props) => {
     const [collapseOpen, setCollapseOpen] = useState();
     const { bgColor, logo } = props;
     const { auth } = usePage().props;
+    const {url} = usePage();
+
+    const {post} = useForm();
+
+    // console.log(route().startsWith('kontrakan.'))
 
     const toggleCollapse = () => {
         setCollapseOpen((data) => !data);
     };
+
+    const logout = (e) => {
+        route(post('logout'));
+    }
 
     return (
         <Navbar
@@ -115,7 +124,7 @@ const Sidebar = (props) => {
                             <DropdownItem divider />
                             <DropdownItem
                                 href="#pablo"
-                                onClick={(e) => e.preventDefault()}
+                                onClick={logout}
                             >
                                 <i className="ni ni-user-run" />
                                 <span>Logout</span>
@@ -287,11 +296,10 @@ const Sidebar = (props) => {
                                 href={route("jenis-cuci.index")}
                                 tag={Link}
                                 active={
-                                    route().current() === "jenis-cuci.index" &&
-                                    true
+                                    route().current('jenis-cuci.*')
                                 }
                                 className={
-                                    route().current() === "jenis-cuci.index"
+                                    route().current('jenis-cuci.*')
                                         ? "bg-teal text-default"
                                         : ""
                                 }
@@ -306,11 +314,11 @@ const Sidebar = (props) => {
                                 href={route("pesanan.index")}
                                 tag={Link}
                                 active={
-                                    route().current() === "jenis-cuci.index" &&
+                                    route().current() === "pesanan.index" &&
                                     true
                                 }
                                 className={
-                                    route().current() === "jenis-cuci.index"
+                                    route().current() === "pesanan.index"
                                         ? "bg-teal text-default"
                                         : ""
                                 }
@@ -330,11 +338,10 @@ const Sidebar = (props) => {
                                 href={route("kontrakan.index")}
                                 tag={Link}
                                 active={
-                                    route().current() === "kontrakan.index" &&
-                                    true
+                                    route().current('kontrakan.*')
                                 }
                                 className={
-                                    route().current() === "kontrakan.index"
+                                    route().current('kontrakan.*')
                                         ? "bg-teal text-default"
                                         : ""
                                 }

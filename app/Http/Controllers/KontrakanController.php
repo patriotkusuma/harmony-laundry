@@ -15,9 +15,25 @@ class KontrakanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $kontrakans = Kontrakan::all();
+        $searchData = $request->query('searchData');
+        $rowPerPage = $request->query('rowPerPage');
+        if($rowPerPage == null){
+            $rowPerPage = 5;
+        }
+
+        $kontrakans = Kontrakan::query();
+        $kontrakans = $kontrakans->when(
+            $searchData,
+            fn ($query) =>
+            $query->where('no_wa', 'like', '%' . $searchData . '%')
+                ->orWhere('harga', 'like', '%' . $searchData . '%')
+                ->orWhere('nama', 'like', '%' . $searchData . '%')
+                ->orWhere('alamat', 'like', '%' . $searchData . '%')
+        );
+
+        $kontrakans = $kontrakans->paginate($rowPerPage)->withQueryString();
         return Inertia::render('Harmony/Kontrakan/KontrakanIndex', compact([
             'kontrakans'
         ]));

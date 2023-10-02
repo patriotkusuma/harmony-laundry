@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('kontrakans', function (Blueprint $table) {
             $table->id();
             $table->string('no_wa');
-            $table->string('name')->nullable();
+            $table->string('nama')->nullable();
             $table->string('alamat')->nullable();
             $table->double('harga');
             $table->string('foto')->nullable();

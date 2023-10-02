@@ -28,7 +28,7 @@ const Edit = (props) => {
     const [prevImage, setPrevImage] = useState(jenisCuci.gambar);
     const [image, setImage] = useState();
 
-    const { data, setData, post,put, progress, errors } = useForm({
+    const { data, setData, post, put, progress, errors } = useForm({
         id: jenisCuci ? jenisCuci.id : "",
         nama: jenisCuci ? jenisCuci.nama : "",
         harga: jenisCuci ? jenisCuci.harga : "",
@@ -48,7 +48,7 @@ const Edit = (props) => {
     const submit = (e) => {
         if (data["gambar"]) {
             post(route("jenis-cuci-image.update", jenisCuci.id));
-        }else{
+        } else {
             put(route("jenis-cuci.update", data.id));
         }
     };
@@ -57,9 +57,16 @@ const Edit = (props) => {
         <AdminLayout header={"Edit Data " + jenisCuci.nama} user={auth.user}>
             <Head title={"Edit Data " + jenisCuci.nama} />
 
-            <header className="bg-gradient-info pb-8 pt-5 pt-md-8">
+            <header className="bg-gradient-info pb-8 pt-5 pt-md-7">
                 <Container fluid>
-                    <Row>
+                    <Alert
+                        color="success"
+                        isOpen={flash.success != null ? true : false}
+                    >
+                        <strong>Success!</strong>{" "}
+                        {flash.success != null && flash.success}
+                    </Alert>
+                    <Row className="mb-3">
                         <Col>
                             <Button
                                 color="secondary"
@@ -72,14 +79,7 @@ const Edit = (props) => {
                             </Button>
                         </Col>
                     </Row>
-                    <hr />
-                    <Alert
-                        color="success"
-                        isOpen={flash.success != null ? true : false}
-                    >
-                        <strong>Success!</strong>{" "}
-                        {flash.success != null && flash.success}
-                    </Alert>
+
                     <Row>
                         <Col>
                             <Card className="bg-secondary shadow">

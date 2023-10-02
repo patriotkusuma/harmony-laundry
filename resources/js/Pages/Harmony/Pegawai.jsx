@@ -133,6 +133,7 @@ const Pegawai = (props) => {
                             headData={headRow}
                             toggleModal={toggleModal}
                             addData={addData}
+                            isAdd={true}
                         >
                             {pegawais.map((pegawai, index) => {
                                 return (

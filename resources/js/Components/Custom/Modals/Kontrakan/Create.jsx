@@ -45,13 +45,13 @@ const Create = (props) => {
         if(filteredData == null){
             post(route('kontrakan.store'), {
                 onSuccess: () => {
-                    toggleModal()
                     setData('id','');
                     setData('no_wa','');
                     setData('nama','');
                     setData('foto','');
                     setData('keterangan','');
                     setData('alamat','');
+                    toggleModal()
                 },
             })
         }
@@ -99,8 +99,8 @@ const Create = (props) => {
                                         type="number"
                                         value={data.no_wa}
                                         defaultValue={
-                                            filteredData != null
-                                                ? filteredData.no_wa
+                                            data != null
+                                                ? data.no_wa
                                                 : ""
                                         }
                                         onChange={(e) =>
@@ -131,8 +131,8 @@ const Create = (props) => {
                                             type="text"
                                             value={data.nama}
                                             defaultValue={
-                                                filteredData != null
-                                                    ? filteredData.nama
+                                                data != null
+                                                    ? data.nama
                                                     : ""
                                             }
                                             onChange={(e) =>
@@ -156,8 +156,8 @@ const Create = (props) => {
                                                 type="number"
                                                 value={data.harga}
                                                 defaultValue={
-                                                    filteredData != null
-                                                        ? filteredData.harga
+                                                    data != null
+                                                        ? data.harga
                                                         : ""
                                                 }
                                                 onChange={(e) =>
@@ -216,8 +216,8 @@ const Create = (props) => {
                                     id="alamat"
                                     name="alamat"
                                     defaultValue={
-                                        filteredData != null
-                                            ? filteredData.alamat
+                                        data != null
+                                            ? data.alamat
                                             : ""
                                     }
                                     onChange={(e) =>

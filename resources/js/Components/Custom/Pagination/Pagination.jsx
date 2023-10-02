@@ -14,7 +14,7 @@ const Pagination = ({currentPage,rowPerPage, totalPosts, onPageChange, previousP
             className='pagination justify-content-end mb-0'
             listClassName='justify-content-end mb-0'
         >
-            <PaginationItem>
+            <PaginationItem disabled={currentPage == 1} className={currentPage == 1 ? 'disabled' : ''}>
                 <PaginationLink
                     onClick={previousPage}
                 >
@@ -36,6 +36,7 @@ const Pagination = ({currentPage,rowPerPage, totalPosts, onPageChange, previousP
                 </PaginationItem>
             ))}
             <PaginationItem
+                disabled={lastPage == currentPage}
                 className={lastPage == currentPage ? 'disabled' : ''}
             >
                 <PaginationLink
